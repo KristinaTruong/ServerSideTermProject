@@ -8,5 +8,7 @@ namespace AirServiceLibrary
 {
     class RequirementClass
     {
+        public String requirementStops { get; set; }
+        public String requirementClass { get; set; }
     }
 }

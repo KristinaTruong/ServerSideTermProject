@@ -17,6 +17,7 @@ namespace AirServiceProject
     // [System.Web.Script.Services.ScriptService]
     public class AirService : System.Web.Services.WebService
     {
+        [WebMethod]
 
     }
        
