@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Services;
 using Utilities;
 
+using System.Data.SqlClient;
+using System.Collections;
+using System.Data;
+
 namespace AirServiceProject
 {
     /// <summary>
@@ -17,8 +21,19 @@ namespace AirServiceProject
     // [System.Web.Script.Services.ScriptService]
     public class AirService : System.Web.Services.WebService
     {
-        [WebMethod]
+        public DBConnect objDB = new DBConnect();
 
+        [WebMethod]
+        public string HelloWorld()
+        {
+            return "Hello World";
+        }
+
+        [WebMethod]
+        public Dataset GetFlights()
+        {
+            return null;
+        }
     }
        
         
