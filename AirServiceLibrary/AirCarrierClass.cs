@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirServiceLibrary
 {
-    class AirCarrierClass
+    public class AirCarrierClass
     {
         //this is aircarrier class
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirServiceLibrary
 {
-    class RequirementClass
+    public class RequirementClass
     {
         public String requirementStops { get; set; }
         public String requirementClass { get; set; }

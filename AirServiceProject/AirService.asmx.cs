@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using Utilities;
-
+using System.Data;
+using AirServiceLibrary;
 using System.Data.SqlClient;
 using System.Collections;
-using System.Data;
 
 namespace AirServiceProject
 {
@@ -18,7 +18,7 @@ namespace AirServiceProject
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
+     //[System.Web.Script.Services.ScriptService]
     public class AirService : System.Web.Services.WebService
     {
         public DBConnect objDB = new DBConnect();
@@ -30,7 +30,9 @@ namespace AirServiceProject
         }
 
         [WebMethod]
-        public Dataset GetFlights()
+        public DataSet GetFlights(AirCarrierClass AirCarrierID, 
+            String DepartureCity, String DepartureState, 
+            String ArrivalCity, String ArrivalState)
         {
             return null;
         }
