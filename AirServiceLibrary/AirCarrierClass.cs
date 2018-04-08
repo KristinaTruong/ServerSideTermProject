@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace AirServiceLibrary
 {
-    class AirCarrierClass
+   public  class AirCarrierClass
     {
-        //this is aircarrier class
+    public int AirCarrierID { get; set; }
+
+    public string AirCarrierName { get; set; }
+
     }
 }
