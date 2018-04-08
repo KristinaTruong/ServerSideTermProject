@@ -14,158 +14,273 @@
             padding: 50px;
             font-family: Arial, Helvetica, sans-serif,Calibri;
             font-size: 15px;
+            background-image: url("https://wallpaper.wiki/wp-content/uploads/2017/05/Abstract-grey-wallpaper-HD.png");
+            background-size: cover;
         }
 
         form {
+            opacity: 0.9;
+        }
+
+        td {
+            vertical-align: top;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <div class="card">
-                <div class="card-header">
-                    <h5>GetFlights</h5>
-                </div>
-                <div class="card-body">
 
-                    <b>Description</b>
-                    <p>
-                        This method accepts as input an AirCarrierID for the air carrier of their choice, and returns a 
-                        DataSet containing records for available flights to an arrival city and state and from a departure city and state
-                    </p>
-                    <b>Parameters (In Order)</b>
-
-                    <ul>
-                        <li>AirCarrierClass AirCarrierID (object)<ul>
-                            <li>AirCarrierClass Properties (getters and setters for each)<ul>
-                                <li>AirCarrierID (int)</li>
-                                <li>AirCarrierName (String)</li>
-                            </ul>
-                            </li>
-                        </ul>
-                        </li>
-                        <li>DepartureCity (String)</li>
-                        <li>DepartureState (String)<ul>
-                            <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
-                        </ul>
-                        </li>
-                        <li>ArrivalCity (String)</li>
-                        <li>ArrivalState (String)<ul>
-                            <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
-                        </ul>
-                        </li>
-                    </ul>
-
-                    <b>Dataset Returned (In Order)</b>
-
-                    <ul>
-                        <li>
-                            FlightID</li>
-                        <li>
-                            AirCarrierID</li>
-                        <li>
-                            AirCarrierName</li>
-                        <li>
-                            Price</li>
-                        <li>
-                            DepartureCity</li>
-                        <li>
-                            DepartureState</li>
-                        <li>
-                            DepartureTime</li>
-                        <li>
-                            ArrivalCity</li>
-                        <li>
-                            ArrivalState</li>
-                        <li>
-                            ArrivalTime</li>
-                        <li>
-                            Stops</li>
-                        <li>
-                            Class</li>
-                        <li>
-                            MaxSeats</li>
-                        <li>
-                            SeatsReserved
-                        </li>
-                    </ul>
-                </div>
+        <h1 style="color: white;">AirService.asmx</h1>
+        <div class="card">
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    WEB METHODS
+  </button>
+            <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+        <div class="card">
+            <div class="card-header">
+                <h5>GetFlights</h5>
             </div>
-            <br />
-            <div class="card">
-                <div class="card-header">
-                    <h5>FindFlights</h5>
-                </div>
-                <div class="card-body">
+            <div class="card-body">
 
-                    <b>Description</b>
-                    <p>
-                        This method accepts an object of the RequirementClass that contains information
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <b>Description</b>
+                            <p>
+                                This method accepts as input an AirCarrierID for the air carrier of their choice, and returns a 
+                        DataSet containing records for available flights to an arrival city and state and from a departure city and state
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>Parameters (In Order)</b>
+
+                            <ol>
+                                <li>AirCarrierClass object - AirCarrierID<ul>
+                                    <li>AirCarrierClass Properties (getters and setters for each)<ul>
+                                        <li>AirCarrierID (int)</li>
+                                        <li>AirCarrierName (String)</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                                <li>String - DepartureCity</li>
+                                <li>String - DepartureState (String)<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                                <li>String - ArrivalCity</li>
+                                <li>String - ArrivalState<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <b>Dataset Returned (In Order)</b>
+
+                            <ol>
+                                <li>int - FlightID</li>
+                                <li>int - AirCarrierID</li>
+                                <li>String - AirCarrierName</li>
+                                <li>decimal - Price</li>
+                                <li>String - DepartureCity</li>
+                                <li>String - DepartureState</li>
+                                <li>String - DepartureTime</li>
+                                <li>String - ArrivalCity</li>
+                                <li>String - ArrivalState</li>
+                                <li>String - ArrivalTime</li>
+                                <li>int - Stops</li>
+                                <li>String - Class</li>
+                                <li>int - MaxSeats</li>
+                                <li>int - SeatsReserved</li>
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h5>FindFlights</h5>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <b>Description</b>
+                            <p>
+                                This method accepts an object of the RequirementClass that contains information
                         about the search requirements the user is looking for and 
                          returns a DataSet containing records 
                         that meet the requirements. 
                         This method returns all flights regardless of the air carrier.
-                    </p>
-                    <b>Parameters (In Order)</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>Parameters (In Order)</b>
 
-                    <ul>
-                        <li>RequirementClass requirements (object)<ul>
-                            <li>RequirementClass Properties (getters and setters for each)<ul>
-                                <li>requirementStops (int)</li>
-                                <li>requirementClass (String)</li>
-                            </ul>
-                            </li>
-                        </ul>
-                        </li>
-                        <li>DepartureCity (String)</li>
-                        <li>DepartureState (String)<ul>
-                            <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
-                        </ul>
-                        </li>
-                        <li>ArrivalCity (String)</li>
-                        <li>ArrivalState (String)<ul>
-                            <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
-                        </ul>
-                        </li>
-                    </ul>
+                            <ol>
+                                <li>RequirementClass object - requirements<ul>
+                                    <li>RequirementClass Properties (getters and setters for each)<ul>
+                                        <li>requirementStops (int)</li>
+                                        <li>requirementClass (String)</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                                <li>String - DepartureCity</li>
+                                <li>String - DepartureState<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                                <li>String - ArrivalCity</li>
+                                <li>String - ArrivalState<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <b>Dataset Returned</b>
 
-                    <b>Dataset Returned</b>
-
-                    <ul>
-                        <li>
-                            FlightID</li>
-                        <li>
-                            AirCarrierID</li>
-                        <li>
-                            AirCarrierName</li>
-                        <li>
-                            Price</li>
-                        <li>
-                            DepartureCity</li>
-                        <li>
-                            DepartureState</li>
-                        <li>
-                            DepartureTime</li>
-                        <li>
-                            ArrivalCity</li>
-                        <li>
-                            ArrivalState</li>
-                        <li>
-                            ArrivalTime</li>
-                        <li>
-                            Stops</li>
-                        <li>
-                            Class</li>
-                        <li>
-                            MaxSeats</li>
-                        <li>
-                            SeatsReserved</li>
-                    </ul>
+                            <ol>
+                                <li>int - FlightID</li>
+                                <li>int - AirCarrierID</li>
+                                <li>String - AirCarrierName</li>
+                                <li>decimal - Price</li>
+                                <li>String - DepartureCity</li>
+                                <li>String - DepartureState</li>
+                                <li>String - DepartureTime</li>
+                                <li>String - ArrivalCity</li>
+                                <li>String - ArrivalState</li>
+                                <li>String - ArrivalTime</li>
+                                <li>int - Stops</li>
+                                <li>String - Class</li>
+                                <li>int - MaxSeats</li>
+                                <li>int - SeatsReserved</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <br />
+        <div class="card">
+                <div class="card-header">
+                    <h5>Reserve</h5>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <b>Description</b>
+                                <p>
+                                   This method accepts air carrier and flight information used to reserve a
+                                     seat for a customer. The method updates the necessary tables to record the
+                                     flight’s reservation. Customers that reserve a flight may or may not be from 
+                                    the database, and will be added to the database if they are new.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Parameters (In Order)</b>
+                                <ol>
+                                    <li>AirCarrierClass object - AirCarrierID<ul>
+                                    <li>AirCarrierClass Properties (getters and setters for each)<ul>
+                                        <li>AirCarrierID (int)</li>
+                                        <li>AirCarrierName (String)</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                    </li>
+                                    <li>FlightClass object - flight</li>
+                                    <li>CustomerClass object - customer</li>
+                                    <li>String - TravelSiteID</li>
+                                    <li>String - TravelSitePassword</li>
+                                </ol>
+                            </div>
+                            <div class="col">
+                                <b>Boolean Returned</b>
 
-    </form>
+                                <ol>
+                                    <li>True - Reservation was successfully booked</li>
+                                    <li>False - Reservation failed to be booked</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+        <!-- TEMPLATE FOR EACH WEBMETHOD ------------------------------------------------------------------------------
+            <div class="card">
+                <div class="card-header">
+                    <h5>WEB METHOD NAME</h5>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <b>Description</b>
+                                <p>
+                                    WEBMETHOD DESCRIPTION
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Parameters (In Order)</b>
+                                <ol>
+                                    <li>PARAMETER TYPE - PARAMETER NAME (ex.String name)</li>
+                                </ol>
+                            </div>
+                            <div class="col">
+                                <b>Dataset Returned (In Order)</b>
+
+                                <ol>
+                                    <li>DATABASE FIELD DATATYPE - FIELD NAME (ex.String CustomerName)</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+            -------------------------------------------------------------------------------------------------------------->
+   </div>
+</div></div><br />
+        <div class="card">
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+    WEB METHODS
+  </button>
+            <div class="collapse" id="collapseExample2">
+  <div class="card card-body">
+        <div class="card">
+            <div class="card-header"  style="background-color:darkgrey;color:white;"><h2>CLASSES</h2></div>
+            <div class="card-body">
+                <!-- CLASS TEMPLATE --------------------------------------------------------------------------
+                    <div class="card">
+            <div class="card-header">
+                    <h2>
+                    CLASS NAME
+                    </h2>
+                    </div>
+            <div class="card-body"></div>
+                    ----------------------------------------------------------------------------------------->
+                </div>
+            </div>
+   </div></div></div>
+      </form>
 </body>
 </html>
