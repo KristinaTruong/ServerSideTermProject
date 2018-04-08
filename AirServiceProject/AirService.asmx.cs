@@ -65,6 +65,7 @@ namespace AirServiceProject
             return OpenFlights;
         }
 
+        
         [WebMethod]
         public Boolean Reserve(AirCarrierClass AirCarrierID,
             FlightClass flight, CustomerClass customer,
@@ -87,7 +88,7 @@ namespace AirServiceProject
                 if (Convert.ToInt32(FlightData.Tables[0].Rows[0][11].ToString()) >
                     Convert.ToInt32(FlightData.Tables[0].Rows[0][12].ToString())) //max seats > seats reserved
                 {
-                    //reserve the flight
+                    //if seats are open, reserve the flight
                     SqlCommand objCommandReserve = new SqlCommand();
                     objCommandReserve.CommandType = CommandType.StoredProcedure;
                     objCommandReserve.CommandText = "ReserveFlight";
@@ -95,6 +96,14 @@ namespace AirServiceProject
                     objCommandReserve.Parameters.AddWithValue("customerID", customer.CustomerID);
                     objCommandReserve.Parameters.AddWithValue("airCarrierID", AirCarrierID.AirCarrierID); //check
                     DataSet ReserveFlight = objDB.GetDataSetUsingCmdObj(objCommandReserve);
+
+                    //once the flight is reserved, update the number of seats reserved for that flight
+                    SqlCommand objCommandUpdate = new SqlCommand();
+                    objCommandUpdate.CommandType = CommandType.StoredProcedure;
+                    objCommandUpdate.CommandText = "UpdateReservedSeats";
+                    objCommandUpdate.Parameters.AddWithValue("flightID", flight.FlightID); //check 
+                    DataSet UpdateFlight = objDB.GetDataSetUsingCmdObj(objCommandUpdate);
+
                     return true;
                 }
                else
