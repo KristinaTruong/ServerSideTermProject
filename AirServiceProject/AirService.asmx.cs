@@ -28,7 +28,7 @@ namespace AirServiceProject
         {
             return "Hello World";
         }
-
+        /*
         [WebMethod]
         public DataSet GetFlights(AirCarrierClass AirCarrierID,
             String DepartureCity, String DepartureState,
@@ -46,7 +46,7 @@ namespace AirServiceProject
 
             return OpenFlights;
         }
-
+        */
         [WebMethod]
         public DataSet FindFlights(RequirementClass requirements,
             String DepartureCity, String DepartureState,
@@ -65,7 +65,7 @@ namespace AirServiceProject
             return OpenFlights;
         }
 
-        
+        /*
         [WebMethod]
         public Boolean Reserve(AirCarrierClass AirCarrierID,
             FlightClass flight, CustomerClass customer,
@@ -118,7 +118,7 @@ namespace AirServiceProject
                 return false;
             }
 
-        }
+        }*/
 
     }
 
