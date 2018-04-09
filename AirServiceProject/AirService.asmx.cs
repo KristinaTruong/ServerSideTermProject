@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using Utilities;
+using AirServiceLibrary;
 
 
 namespace AirServiceProject
@@ -43,7 +44,6 @@ namespace AirServiceProject
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "FilterFlightsByCarrier";
             objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID);
-            objCommand.Parameters.AddWithValue("@therequirements", requirements);
             objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
             objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
             objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
