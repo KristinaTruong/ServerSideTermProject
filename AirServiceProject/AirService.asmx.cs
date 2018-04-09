@@ -279,11 +279,13 @@ namespace AirServiceProject
             return AirCarrier;
         }
         [WebMethod]
-        public DataSet FilterFlightsByCarrier(int AirCarrierID, string requirements, string DepartureCity, string DepartureState, string ArrivalCity, string ArrivalState)
+        public DataSet FilterFlightsByCarrier(AirCarrierClass AirCarrierID, RequirementClass requirements, string DepartureCity, string DepartureState, string ArrivalCity, string ArrivalState)
         {
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "FilterFlightsByCarrier";
-            objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID);
+            objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
+            objCommand.Parameters.AddWithValue("@theStops", requirements.requirementStops);
+            objCommand.Parameters.AddWithValue("@theClass", requirements.requirementClass);
             objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
             objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
             objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
