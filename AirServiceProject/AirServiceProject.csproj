@@ -95,6 +95,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="image\maxresdefault.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -110,6 +111,8 @@
     <Content Include="AirService.asmx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+
+    <Content Include="Test.aspx" />
     <Content Include="ServiceDescription.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -119,12 +122,21 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+
     <Compile Include="ServiceDescription.aspx.cs">
       <DependentUpon>ServiceDescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ServiceDescription.aspx.designer.cs">
       <DependentUpon>ServiceDescription.aspx</DependentUpon>
+
     </Compile>
   </ItemGroup>
   <ItemGroup>
