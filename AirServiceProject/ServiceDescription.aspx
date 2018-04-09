@@ -61,13 +61,7 @@
                                         <b>Parameters (In Order)</b>
 
                                         <ol>
-                                            <li>AirCarrierClass object - AirCarrierID<ul>
-                                                <li>AirCarrierClass Properties (getters and setters for each)<ul>
-                                                    <li>AirCarrierID (int)</li>
-                                                    <li>AirCarrierName (String)</li>
-                                                </ul>
-                                                </li>
-                                            </ul>
+                                            <li>AirCarrierClass object - AirCarrierID<
                                             </li>
                                             <li>String - DepartureCity</li>
                                             <li>String - DepartureState (String)<ul>
@@ -121,7 +115,8 @@
                                             This method accepts an object of the RequirementClass that contains information
                         about the search requirements the user is looking for and 
                          returns a DataSet containing records 
-                        that meet the requirements. 
+                        that meet the requirements. Both class and stops may be specified for this search, but at least one of these requirements must be
+                                            specified for this method.
                         This method returns all flights regardless of the air carrier.
                                         </p>
                                     </div>
@@ -131,13 +126,7 @@
                                         <b>Parameters (In Order)</b>
 
                                         <ol>
-                                            <li>RequirementClass object - requirements<ul>
-                                                <li>RequirementClass Properties (getters and setters for each)<ul>
-                                                    <li>requirementStops (int)</li>
-                                                    <li>requirementClass (String)</li>
-                                                </ul>
-                                                </li>
-                                            </ul>
+                                            <li>RequirementClass object - requirements
                                             </li>
                                             <li>String - DepartureCity</li>
                                             <li>String - DepartureState<ul>
@@ -197,14 +186,6 @@
                                     <div class="col">
                                         <b>Parameters (In Order)</b>
                                         <ol>
-                                            <li>AirCarrierClass object - AirCarrierID<ul>
-                                                <li>AirCarrierClass Properties (getters and setters for each)<ul>
-                                                    <li>AirCarrierID (int)</li>
-                                                    <li>AirCarrierName (String)</li>
-                                                </ul>
-                                                </li>
-                                            </ul>
-                                            </li>
                                             <li>FlightClass object - flight</li>
                                             <li>CustomerClass object - customer</li>
                                             <li>String - TravelSiteID</li>
@@ -226,39 +207,43 @@
                     </div>
                     <br />
                     <div class="card">
-                <div class="card-header">
-                    <h5>ReserveTwoWay</h5>
-                </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <b>Description</b>
-                                <p>
-                                    Similar to the Reserve method, but this method reserves a two-way trip. Two flight objects are needed.
-                                </p>
-                            </div>
+                        <div class="card-header">
+                            <h5>ReserveTwoWay</h5>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <b>Parameters (In Order)</b>
-                                <ol>
-                                    <li>PARAMETER TYPE - PARAMETER NAME (ex.String name)</li>
-                                </ol>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Description</b>
+                                        <p>
+                                            Similar to the Reserve method, but this method reserves a two-way trip. Two flight objects are needed.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Parameters (In Order)</b>
+                                        <ol>
+                                            <li>FlightClass object - firstFlight</li>
+                                            <li>FlightClass object - secondFlight</li>
+                                            <li>CustomerClass object - customer</li>
+                                            <li>String - TravelSiteID</li>
+                                            <li>String - TravelSitePassword</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col">
+                                        <b>Boolean Returned</b>
+                                        <ol>
+                                            <li>True - Reservations were successfully booked</li>
+                                            <li>False - Reservations failed to be booked</li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                <b>Dataset Returned (In Order)</b>
 
-                                <ol>
-                                    <li>DATABASE FIELD DATATYPE - FIELD NAME (ex.String CustomerName)</li>
-                                </ol>
-                            </div>
                         </div>
                     </div>
-
-                </div>
-            </div>
-            <br />
+                    <br />
                     <!-- TEMPLATE FOR EACH WEBMETHOD ------------------------------------------------------------------------------
             <div class="card">
                 <div class="card-header">
@@ -385,6 +370,7 @@
 
                 </div>
             </div>
+        </div>
     </form>
 </body>
 </html>

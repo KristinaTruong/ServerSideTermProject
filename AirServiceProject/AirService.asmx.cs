@@ -28,7 +28,8 @@ namespace AirServiceProject
         {
             return "Hello World";
         }
-        /*
+
+        //Get flights with specified aircarrier, dep.city, dep.state, arrivalCity, arrivalState
         [WebMethod]
         public DataSet GetFlights(AirCarrierClass AirCarrierID,
             String DepartureCity, String DepartureState,
@@ -42,28 +43,49 @@ namespace AirServiceProject
             objCommand.Parameters.AddWithValue("departureState", DepartureState);
             objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
             objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
-            DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
+            DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand); //return results of stored procedure as dataset
 
             return OpenFlights;
         }
-        */
 
+        //get flights with the specificed requirements, departure reqs and arrival reqs
         [WebMethod]
         public DataSet FindFlights(RequirementClass requirements,
             String DepartureCity, String DepartureState,
             String ArrivalCity, String ArrivalState)
         {
-            SqlCommand objCommand = new SqlCommand();
-            objCommand.CommandType = CommandType.StoredProcedure;
-            objCommand.CommandText = "FindOpenFlights";
-            objCommand.Parameters.AddWithValue("stops", requirements.requirementStops);
-            objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
-            objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
-            objCommand.Parameters.AddWithValue("departureState", DepartureState);
-            objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
-            objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
-            DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
-            return OpenFlights;
+            //if only one requirement is specified or neither is
+            if (requirements.requirementClass == null || requirements.requirementStops == null)
+            {
+                SqlCommand objCommand = new SqlCommand();
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "FindFlightsEitherReq";
+                objCommand.Parameters.AddWithValue("stops", requirements.requirementStops);
+                objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
+                objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
+                objCommand.Parameters.AddWithValue("departureState", DepartureState);
+                objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
+                objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
+                DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
+                return OpenFlights;
+            }
+
+            //if both requirements are specified
+            else
+            {
+                SqlCommand objCommand = new SqlCommand();
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "FindFlightsBothReq";
+                objCommand.Parameters.AddWithValue("stops", requirements.requirementStops);
+                objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
+                objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
+                objCommand.Parameters.AddWithValue("departureState", DepartureState);
+                objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
+                objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
+                DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
+                return OpenFlights;
+            }
+
         }
 
 
@@ -73,7 +95,7 @@ namespace AirServiceProject
             String TravelSiteID, String TravelSitePassword)
         {
             //checks to make sure the arguments are valid
-            if (checkIdAndPassword(TravelSiteID,TravelSitePassword)
+            if (checkIdAndPassword(TravelSiteID, TravelSitePassword)
                 && (flight.FlightID != null)
                 && (customer.CustomerID != 0))
             {
@@ -111,36 +133,32 @@ namespace AirServiceProject
                 {
                     return false;
                 }
-
-
-
             }
             else //if arguments are invalid
             {
                 return false;
             }
-
         }
 
+        //Reserve a two-way flight
         [WebMethod]
-        public Boolean ReserveTwoWay(AirCarrierClass AirCarrierID,
+        public Boolean ReserveTwoWay(
             FlightClass firstFlight, FlightClass secondFlight,
             CustomerClass customer,
             String TravelSiteID, String TravelSitePassword)
         {
             //check arguments for validity
-            if (checkIdAndPassword(TravelSiteID,TravelSitePassword)
-                && (AirCarrierID != null)
+            if (checkIdAndPassword(TravelSiteID, TravelSitePassword)
                 && (firstFlight != null)
                 && (secondFlight != null)
                 && (customer != null))
             {
-                //check to see if both flights have 
+                //check to see if both flights have seats
                 if ((flightHasSeats(firstFlight) == true) && (flightHasSeats(secondFlight) == true))
                 {
-                    checkCustomer(customer);
-                    Reserve(firstFlight, customer, TravelSiteID, TravelSitePassword);
-                    Reserve(secondFlight, customer, TravelSiteID, TravelSitePassword);
+                    checkCustomer(customer); //check if customer exists, if not, add to database
+                    Reserve(firstFlight, customer, TravelSiteID, TravelSitePassword); //reserve first flight
+                    Reserve(secondFlight, customer, TravelSiteID, TravelSitePassword); //reserve second flight
                     return true;
                 }
             }
@@ -153,24 +171,25 @@ namespace AirServiceProject
         //if no for either, a new customer is made
         private void checkCustomer(CustomerClass customer)
         {
-            if(customer.CustomerID == 0)
+            if (customer.CustomerID == 0)
             {
                 createCustomer(customer);
             }
-            else {
+            else
+            {
                 //find the customer if a customerID is given
-            SqlCommand objCommandCheckCustomer = new SqlCommand();
-            objCommandCheckCustomer.CommandType = CommandType.StoredProcedure;
-            objCommandCheckCustomer.CommandText = "FindCustomer";
-            objCommandCheckCustomer.Parameters.AddWithValue("customerID", customer.CustomerID); //check 
-            DataSet FindCustomer = objDB.GetDataSetUsingCmdObj(objCommandCheckCustomer);
+                SqlCommand objCommandCheckCustomer = new SqlCommand();
+                objCommandCheckCustomer.CommandType = CommandType.StoredProcedure;
+                objCommandCheckCustomer.CommandText = "FindCustomer";
+                objCommandCheckCustomer.Parameters.AddWithValue("customerID", customer.CustomerID); //check 
+                DataSet FindCustomer = objDB.GetDataSetUsingCmdObj(objCommandCheckCustomer);
                 if (FindCustomer.Tables[0].Rows.Count == 0)
                 {
                     //create a new customer if the customer cannot be found
                     createCustomer(customer);
                 }
             }
-            
+
 
         }
 
