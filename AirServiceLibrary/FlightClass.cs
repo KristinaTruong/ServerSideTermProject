@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirServiceLibrary
 {
-    class FlightClass
+    public class FlightClass
     {
         public int FlightID { get; set; }
         public int AirCarrierID { get; set; }

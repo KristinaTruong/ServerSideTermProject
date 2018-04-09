@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace AirServiceLibrary
 {
-    class CustomerClass
+    public class CustomerClass
     {
+        public int CustomerID { get; set; }
+        public String CustomerName { get; set; }
+        public String CustomerPhone { get; set; }
+        public String CustomerEmail { get; set; }
+
     }
 }
