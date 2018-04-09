@@ -33,7 +33,7 @@
 
         <h1 style="color: white;">AirService.asmx</h1>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <button class="btn btn-light btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     WEB METHODS
                 </button>
@@ -225,6 +225,40 @@
                         </div>
                     </div>
                     <br />
+                    <div class="card">
+                <div class="card-header">
+                    <h5>ReserveTwoWay</h5>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <b>Description</b>
+                                <p>
+                                    Similar to the Reserve method, but this method reserves a two-way trip. Two flight objects are needed.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Parameters (In Order)</b>
+                                <ol>
+                                    <li>PARAMETER TYPE - PARAMETER NAME (ex.String name)</li>
+                                </ol>
+                            </div>
+                            <div class="col">
+                                <b>Dataset Returned (In Order)</b>
+
+                                <ol>
+                                    <li>DATABASE FIELD DATATYPE - FIELD NAME (ex.String CustomerName)</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br />
                     <!-- TEMPLATE FOR EACH WEBMETHOD ------------------------------------------------------------------------------
             <div class="card">
                 <div class="card-header">
@@ -268,7 +302,7 @@
             <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <button class="btn btn-light btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
                     CLASSES
                 </button>
