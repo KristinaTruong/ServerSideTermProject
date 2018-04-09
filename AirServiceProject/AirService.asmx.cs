@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -8,6 +10,7 @@ using System.Data;
 using AirServiceLibrary;
 using System.Data.SqlClient;
 using System.Collections;
+
 
 namespace AirServiceProject
 {
@@ -256,6 +259,40 @@ namespace AirServiceProject
                 }
             }
             return false; //if flight not found or flight has fully booked, return false
+        }
+        SqlCommand objCommand = new SqlCommand();
+
+        [WebMethod]
+        public DataSet GetAirCarriers(string DepartureCity, string DepartureState, string ArrivalCity, string ArrivalState)
+        {
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetAirCarriers";
+            objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+            objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+            objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+            objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+
+            DataSet AirCarrier = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            return AirCarrier;
+        }
+        [WebMethod]
+        public DataSet FilterFlightsByCarrier(int AirCarrierID, string requirements, string DepartureCity, string DepartureState, string ArrivalCity, string ArrivalState)
+        {
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FilterFlightsByCarrier";
+            objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID);
+            objCommand.Parameters.AddWithValue("@therequirements", requirements);
+            objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+            objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+            objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+            objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+
+            DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+            return FilterFlight;
+
+
+
         }
     }
 
