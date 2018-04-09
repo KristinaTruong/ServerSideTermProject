@@ -129,7 +129,7 @@
     </Compile>
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
-
+    </Compile>
     <Compile Include="ServiceDescription.aspx.cs">
       <DependentUpon>ServiceDescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
