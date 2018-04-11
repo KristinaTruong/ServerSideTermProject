@@ -57,7 +57,7 @@
                             <br />
                             <br />
                             <br />
-                            SEARCH FOR A FLIGHT<br />
+ SEARCH FOR A FLIGHT<br />
                             <hr />
                             <br />
                             <asp:Label ID="lblDepCity" runat="server" Text="Departure City:"></asp:Label><br />
@@ -85,8 +85,7 @@
                             <br />
                             <asp:Label ID="Label1" runat="server" Text="Preferred Class:"></asp:Label><br />
                             <asp:DropDownList ID="ddlClass" runat="server">
-                                <asp:ListItem>Choose</asp:ListItem>
-                                <asp:ListItem>First</asp:ListItem>
+                                <asp:ListItem Selected="True">First</asp:ListItem>
                                 <asp:ListItem>Economy</asp:ListItem>
                                 <asp:ListItem>Business</asp:ListItem>
                                 <asp:ListItem>Premium</asp:ListItem>
@@ -94,7 +93,7 @@
                             </asp:DropDownList>
                             <br />
                             <br />
-                            Preferred Number of Stops:<br />
+                            Preferred Number of Stops: Preferred Number of Stops:<br />
                             <asp:TextBox ID="txtStops" runat="server"></asp:TextBox>
                             <br />
                             <br />

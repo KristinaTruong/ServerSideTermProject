@@ -82,17 +82,16 @@ namespace AirServiceProject
             numberOfStopsB = (numberOfStops != -1) ? true : false;
 
             //for one or two way radio buttons
-            if (ddlClass.SelectedIndex != 0)
-            {
+
                 switch (ddlClass.SelectedIndex)
                 {
-                    case 1: classReq = "First"; break;
-                    case 2: classReq = "Economy"; break;
-                    case 3: classReq = "Business"; break;
-                    case 4: classReq = "Premium"; break;
+                    case 0: classReq = ddlClass.SelectedValue; break;
+                    case 1: classReq = ddlClass.SelectedValue; break;
+                    case 2: classReq = ddlClass.SelectedValue; break;
+                    case 3: classReq = ddlClass.SelectedValue; break;
                     default: classReq = ""; break;
                 }
-            }
+
 
             classReqB = (classReq != "") ? true : false;
 
@@ -121,12 +120,13 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (!numberOfStopsB &&
-                !classReqB) &&
+                !numberOfStopsB &&
+                !classReqB &&
                 !airCarrierB
                 )
             {
                 gvFlights.DataSource = pxy.GetAirCarriers(depCity, depState, arrivCity, arrivState); //call on web service method
+                gvFlights.DataBind();
             }
 
             else if //get flights
@@ -134,12 +134,13 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (!numberOfStopsB &&
-                !classReqB) &&
+                !numberOfStopsB &&
+                !classReqB &&
                 airCarrierB
                 )
             {
                 gvFlights.DataSource = pxy.GetFlights(airCarrierID, depCity, depState, arrivCity, arrivState); //call on web service method
+                gvFlights.DataBind();
             }
 
             else if //find flights
@@ -147,12 +148,13 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (numberOfStopsB &&
-                classReqB) &&
+                numberOfStopsB &&
+                classReqB &&
                 !airCarrierB
                 )
             {
                 gvFlights.DataSource = pxy.FindFlights(requirements, depCity, depState, arrivCity, arrivState); //call on web service method
+                gvFlights.DataBind();
             }
 
             else if //filter flights by carrier
@@ -160,18 +162,24 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (numberOfStopsB &&
-                classReqB) &&
+                numberOfStopsB &&
+                classReqB &&
                 airCarrierB
                 )
             {
                 gvFlights.DataSource = pxy.FilterFlightsByCarrier(airCarrierID, requirements, depCity, depState, arrivCity, arrivState); //call on web service method
+                gvFlights.DataBind();
             }
 
 
             else
             {
-
+                txtName.Text = depCity;
+                txtPhone.Text = depState;
+                txtEmail.Text = arrivCity;
+                txtFlightID.Text = arrivState;
+                txtAirCarrier.Text = depCityB.ToString() + "-" + depStateB.ToString() + "-" + arrivCityB.ToString() + "-" + arrivStateB.ToString();
+                txtTravelID.Text = numberOfStops + "-" + numberOfStopsB.ToString() + "-" + classReq + "-" + classReqB.ToString();
             }
             reserveSection.Style["display"] = "block";
 
