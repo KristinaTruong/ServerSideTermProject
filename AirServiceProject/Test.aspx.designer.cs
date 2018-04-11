@@ -166,15 +166,6 @@ namespace AirServiceProject {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// gvFlights control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvFlights;
-        
-        /// <summary>
         /// reserveSection control.
         /// </summary>
         /// <remarks>
@@ -247,6 +238,15 @@ namespace AirServiceProject {
         protected global::System.Web.UI.WebControls.TextBox txtTravelPassword;
         
         /// <summary>
+        /// txtReserveAirCarrierID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReserveAirCarrierID;
+        
+        /// <summary>
         /// btnReserve control.
         /// </summary>
         /// <remarks>
@@ -254,5 +254,14 @@ namespace AirServiceProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReserve;
+        
+        /// <summary>
+        /// gvFlights control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvFlights;
     }
 }
