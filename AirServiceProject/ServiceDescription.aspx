@@ -485,6 +485,7 @@
                             <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
+                                <li>int - FlightUniqueID</li>
                                 <li>int - FlightID</li>
                                 <li>int - AirCarrierID</li>
                                 <li>decimal - Price</li>

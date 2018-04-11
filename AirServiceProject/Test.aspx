@@ -61,20 +61,24 @@
                             <br />
                             <asp:Label ID="lblDepCity" runat="server" Text="Departure City:"></asp:Label><br />
                             <asp:TextBox ID="txtDepCity" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="valDepCity" runat="server" ControlToValidate="txtDepCity" ErrorMessage="*Required" ValidationGroup="validSearch">*</asp:RequiredFieldValidator>
                             <br />
                             <br />
                             <asp:Label ID="lblDepState" runat="server" Text="Departure State:"></asp:Label><br />
 
                             <asp:TextBox ID="txtDepState" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDepState" ErrorMessage="*Required" ValidationGroup="validSearch">*</asp:RequiredFieldValidator>
                             <br />
                             <br />
                             <asp:Label ID="lblArrCity" runat="server" Text="Arrival City:"></asp:Label>
                             <br />
                             <asp:TextBox ID="txtArrCity" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtArrCity" ErrorMessage="*Required" ValidationGroup="validSearch">*</asp:RequiredFieldValidator>
                             <br />
                             <br />
                             <asp:Label ID="lblArrState" runat="server" Text="Arrival State:"></asp:Label><br />
-                            <asp:TextBox ID="txtArrState" runat="server"></asp:TextBox>&nbsp;<br />
+                            <asp:TextBox ID="txtArrState" runat="server"></asp:TextBox>&nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtArrState" ErrorMessage="*Required" ValidationGroup="validSearch">*</asp:RequiredFieldValidator>
+                            <br />
                             <br />
                             <br />
                             <asp:RadioButton ID="RbTwo" runat="server" Text="Round Trip" /><br />
@@ -106,7 +110,7 @@
 
                             <br />
                             <br />
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" ValidationGroup="validSearch" />
 
                             
                         </div>
@@ -138,21 +142,25 @@
                                 <br />
                                 Flight ID<br />
                                 <asp:TextBox ID="txtFlightID" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtFlightID" ErrorMessage="*Required" ValidationGroup="validReserve">*</asp:RequiredFieldValidator>
                                 <br />
                                 <br />
                                 Travel Site ID<br />
                                 <asp:TextBox ID="txtTravelID" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtTravelID" ErrorMessage="*Required" ValidationGroup="validReserve">*</asp:RequiredFieldValidator>
                                 <br />
                                 <br />
                                 Travel Password<br />
                                 <asp:TextBox ID="txtTravelPassword" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtTravelPassword" ErrorMessage="*Required" ValidationGroup="validReserve">*</asp:RequiredFieldValidator>
                                 <br />
                                 <br />
                                 Air Carrier ID<br />
                                 <asp:TextBox ID="txtReserveAirCarrierID" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtReserveAirCarrierID" ErrorMessage="*Required" ValidationGroup="validReserve">*</asp:RequiredFieldValidator>
                                 <br />
                                 <br />
-                                <asp:Button ID="btnReserve" runat="server" Text="Reserve" OnClick="btnReserve_Click" CausesValidation="False" ViewStateMode="Enabled" />
+                                <asp:Button ID="btnReserve" runat="server" Text="Reserve" OnClick="btnReserve_Click" ViewStateMode="Enabled" ValidationGroup="validReserve" />
                             </div>
                         </div>
                     </td>
