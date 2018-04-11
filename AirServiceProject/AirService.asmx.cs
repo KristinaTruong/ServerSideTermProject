@@ -28,11 +28,6 @@ namespace AirServiceProject
     {
         public DBConnect objDB = new DBConnect();
 
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
 
         //Get flights with specified aircarrier, dep.city, dep.state, arrivalCity, arrivalState
         [WebMethod]
@@ -55,9 +50,7 @@ namespace AirServiceProject
 
         //get flights with the specificed requirements, departure reqs and arrival reqs
         [WebMethod]
-        public DataSet FindFlights(RequirementClass requirements,
-            String DepartureCity, String DepartureState,
-            String ArrivalCity, String ArrivalState)
+        public DataSet FindFlights(RequirementClass requirements,String DepartureCity, String DepartureState,String ArrivalCity, String ArrivalState)
         {
             //if only one requirement is specified or neither is
             if (requirements.requirementClass == null || requirements.requirementStops == null)
@@ -96,8 +89,7 @@ namespace AirServiceProject
 
         //Reserve one flight
         [WebMethod]
-        public Boolean Reserve(FlightClass flight, CustomerClass customer,
-            String TravelSiteID, String TravelSitePassword)
+        public Boolean Reserve(AirCarrierClass AirCarrierID, FlightClass flight, CustomerClass customer,String TravelSiteID, String TravelSitePassword)
         {
             //checks to make sure the arguments are valid
             if (checkIdAndPassword(TravelSiteID, TravelSitePassword)
@@ -122,7 +114,7 @@ namespace AirServiceProject
                     objCommandReserve.Parameters.AddWithValue("reservationID", reservationID);
                     objCommandReserve.Parameters.AddWithValue("flightID", flight.FlightID); //check 
                     objCommandReserve.Parameters.AddWithValue("customerID", customer.CustomerID);
-                    objCommandReserve.Parameters.AddWithValue("airCarrierID", flight.AirCarrierID); //check
+                    objCommandReserve.Parameters.AddWithValue("airCarrierID", AirCarrierID.AirCarrierID); //check
                     DataSet ReserveFlight = objDB.GetDataSetUsingCmdObj(objCommandReserve);
 
                     //update the number of seats reserved for that flight
@@ -145,6 +137,7 @@ namespace AirServiceProject
             }
         }
 
+        /*
         //Reserve a two-way flight
         [WebMethod]
         public Boolean ReserveTwoWay(
@@ -170,6 +163,7 @@ namespace AirServiceProject
             return false;
 
         }
+        */
 
         //checks to see if a customer ID is provided in customer object or if the provided
         //customerID is in the customer database
