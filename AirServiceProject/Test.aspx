@@ -56,16 +56,6 @@
         <asp:Label ID="lblArrState" runat="server" Text="Arrival State:"></asp:Label><br />
         <asp:TextBox ID="txtArrState" runat="server" ></asp:TextBox>&nbsp;<br />
         <br />
-        <asp:Calendar ID="gvCalender" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black"
-             Height="190px" style="width:100%;" NextPrevFormat="FullMonth" Width="350px">
-            <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-            <NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
-            <OtherMonthDayStyle ForeColor="#999999" />
-            <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-            <TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
-            <TodayDayStyle BackColor="#CCCCCC"/>
-        </asp:Calendar>
-        <br />
         <asp:RadioButton ID="RbTwo" runat="server" Text="Round Trip" /><br />
         <asp:RadioButton ID="RbOne" runat="server"  Text="One Way" />
 
@@ -83,14 +73,30 @@
         </asp:DropDownList>
         <br />
         <br />
-        <asp:Label ID="Label2" runat="server"  Text="Air Carrier"></asp:Label>
+        Preferred Number of Stops:<br />
+        <asp:TextBox ID="txtStops" runat="server"></asp:TextBox>
         <br />
-        <p>
+        <br />
+        <asp:Label ID="Label2" runat="server"  Text="Air Carrier"></asp:Label>
+
+            <br />
+
             <asp:TextBox ID="txtAirCarrier" runat="server" ></asp:TextBox>
-        </p>
+
         <p>
             <br />
-        <asp:Button ID="btnSearch" runat="server"  Text="Search" />
+        <asp:Button ID="btnSearch" runat="server"  Text="Search" OnClick="btnSearch_Click" />
+            <asp:GridView ID="gvFlights" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
+            </asp:GridView>
         </p>
     </form>
         </div>

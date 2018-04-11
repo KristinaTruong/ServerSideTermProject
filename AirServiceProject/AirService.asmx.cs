@@ -93,7 +93,7 @@ namespace AirServiceProject
         {
             //checks to make sure the arguments are valid
             if (checkIdAndPassword(TravelSiteID, TravelSitePassword)
-                && (flight.FlightID != null)
+                && (flight.FlightID != 0)
                 && (customer.CustomerID != 0))
             {
                 //Check that the flight still has seats left
@@ -206,8 +206,8 @@ namespace AirServiceProject
         //method to check travel site credentials
         private Boolean checkIdAndPassword(String TravelSiteID, String TravelSitePassword)
         {
-            if ((TravelSiteID.Trim() == "")
-                && (TravelSitePassword.Trim() == ""))
+            if ((TravelSiteID.Trim() == "KJ")
+                && (TravelSitePassword.Trim() == "KJ"))
             {
                 return true; //return true if correct
             }
