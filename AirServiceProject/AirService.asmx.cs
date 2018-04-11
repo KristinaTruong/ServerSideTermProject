@@ -329,12 +329,26 @@ namespace AirServiceProject
                     DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
                     return FilterFlight;
                 }
-                else
+                else if (requirements.requirementClass != null)
                 {
                     objCommand.CommandType = CommandType.StoredProcedure;
                     objCommand.CommandText = "FilterFlightsByCarrierClass";
                     objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
                     objCommand.Parameters.AddWithValue("@theClass", requirements.requirementClass);
+                    objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+
+                    DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return FilterFlight;
+                }
+
+                else
+                {
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FilterFlightsByCarrierWOReqs";
+                    objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
                     objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
                     objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
                     objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);

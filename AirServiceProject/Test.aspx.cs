@@ -170,7 +170,7 @@ namespace AirServiceProject
             {
                 gvFlights.DataSource = pxy.FindFlights(requirements, depCity, depState, arrivCity, arrivState); //call on web service method
                 gvFlights.DataBind();
-                txtName.Text = requirements.requirementClass;
+                //txtName.Text = requirements.requirementClass;
             }
 
             else if //filter flights by carrier
