@@ -93,7 +93,7 @@
                             </asp:DropDownList>
                             <br />
                             <br />
-                            Preferred Number of Stops: Preferred Number of Stops:<br />
+ Preferred Number of Stops: Preferred Number of Stops:<br />
                             <asp:TextBox ID="txtStops" runat="server"></asp:TextBox>
                             <br />
                             <br />
@@ -106,7 +106,7 @@
 
                             <br />
                             <br />
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" UseSubmitBehavior="False" />
 
                             <asp:GridView ID="gvFlights" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
@@ -127,7 +127,7 @@
                                 <br />
                                 <br />
                                 <br />
-                                BOOK YOUR FLIGHT<br />
+                                BOOK YOUR FLIGHT           BOOK YOUR FLIGHT<br />
                                 <hr />
                                 <br />
                                 Customer ID<br />

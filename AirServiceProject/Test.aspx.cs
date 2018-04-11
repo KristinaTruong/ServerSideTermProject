@@ -57,7 +57,7 @@ namespace AirServiceProject
             gvFlights.DataBind();
         }
 
-
+        /*
         protected void btnSearch_Click(object sender, EventArgs e)
         {
 
@@ -187,6 +187,18 @@ namespace AirServiceProject
 
         }
 
+    */
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            AirServiceWS.AirService pxy = new AirServiceWS.AirService();
+            depCity = txtDepCity.Text;
+            depState = txtDepState.Text;
+            arrivCity = txtArrCity.Text;
+            arrivState = txtArrCity.Text;
+            DataSet ds = pxy.GetAirCarriers(depCity, depState, arrivCity, arrivState);
+            gvFlights.DataSource = ds;
+            gvFlights.DataBind();
+        }
         protected void btnReserve_Click(object sender, EventArgs e)
         {
 
