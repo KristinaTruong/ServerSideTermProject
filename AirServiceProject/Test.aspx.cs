@@ -8,8 +8,8 @@ using System.Data;
 
 namespace AirServiceProject
 {
-	public partial class Test : System.Web.UI.Page
-	{
+    public partial class Test : System.Web.UI.Page
+    {
         //global pxy object for methods to call web methods with
         public AirServiceWS.AirService pxy = new AirServiceWS.AirService();
 
@@ -56,8 +56,17 @@ namespace AirServiceProject
             gvFlights.DataSource = startDS;
             gvFlights.DataBind();
         }
-
         /*
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            depCity = txtDepCity.Text;
+            depState = txtDepState.Text;
+            arrivCity = txtArrCity.Text;
+            arrivState = txtArrState.Text;
+            gvFlights.DataSource = pxy.GetAirCarriers(depCity, depState, arrivCity, arrivState);
+            gvFlights.DataBind();
+        }*/
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
 
@@ -83,17 +92,19 @@ namespace AirServiceProject
 
             //for one or two way radio buttons
 
-                switch (ddlClass.SelectedIndex)
-                {
-                    case 0: classReq = ddlClass.SelectedValue; break;
-                    case 1: classReq = ddlClass.SelectedValue; break;
-                    case 2: classReq = ddlClass.SelectedValue; break;
-                    case 3: classReq = ddlClass.SelectedValue; break;
-                    default: classReq = ""; break;
-                }
+            switch (ddlClass.SelectedIndex)
+            {
+                case 0: classReq = null; break;
+                case 1: classReq = ddlClass.SelectedValue; break;
+                case 2: classReq = ddlClass.SelectedValue; break;
+                case 3: classReq = ddlClass.SelectedValue; break;
+                case 4: classReq = ddlClass.SelectedValue; break;
+
+                default: classReq = null; break;
+            }
 
 
-            classReqB = (classReq != "") ? true : false;
+            classReqB = (classReq != null) ? true : false;
 
             airCarrier = (txtAirCarrier.Text.Trim() != "") ? txtAirCarrier.Text.Trim() : "";
             airCarrierB = (airCarrier != "") ? true : false;
@@ -106,6 +117,10 @@ namespace AirServiceProject
             if (numberOfStopsB == true)
             {
                 requirements.requirementStops = numberOfStops.ToString();
+            }
+            else
+            {
+                requirements.requirementStops = null;
             }
             if (classReqB == true)
             {
@@ -148,13 +163,14 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                numberOfStopsB &&
-                classReqB &&
+                (numberOfStopsB ||
+                classReqB) &&
                 !airCarrierB
                 )
             {
                 gvFlights.DataSource = pxy.FindFlights(requirements, depCity, depState, arrivCity, arrivState); //call on web service method
                 gvFlights.DataBind();
+                //txtName.Text = requirements.requirementClass;
             }
 
             else if //filter flights by carrier
@@ -162,8 +178,8 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                numberOfStopsB &&
-                classReqB &&
+                (numberOfStopsB ||
+                classReqB) &&
                 airCarrierB
                 )
             {
@@ -181,53 +197,46 @@ namespace AirServiceProject
                 txtAirCarrier.Text = depCityB.ToString() + "-" + depStateB.ToString() + "-" + arrivCityB.ToString() + "-" + arrivStateB.ToString();
                 txtTravelID.Text = numberOfStops + "-" + numberOfStopsB.ToString() + "-" + classReq + "-" + classReqB.ToString();
             }
-            reserveSection.Style["display"] = "block";
+
 
 
 
         }
 
-    */
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            AirServiceWS.AirService pxy = new AirServiceWS.AirService();
-            depCity = txtDepCity.Text;
-            depState = txtDepState.Text;
-            arrivCity = txtArrCity.Text;
-            arrivState = txtArrCity.Text;
-            DataSet ds = pxy.GetAirCarriers(depCity, depState, arrivCity, arrivState);
-            gvFlights.DataSource = ds;
-            gvFlights.DataBind();
-        }
+
         protected void btnReserve_Click(object sender, EventArgs e)
         {
 
-            //set customer information
-            customer.CustomerID = Convert.ToInt32(txtID.Text);
-            customer.CustomerName = txtName.Text;
-            customer.CustomerPhone = txtPhone.Text;
-            customer.CustomerEmail = txtEmail.Text;
-
-            //set flight object flight ID information
-            flight.FlightID = Convert.ToInt32(txtFlightID.Text);
-
-            //save inputed ID and password
-            travelID = txtTravelID.Text;
-            travelPassword = txtTravelPassword.Text;
-
-            if //reserve flight
-                (depCityB &&
-                depStateB &&
-                arrivCityB &&
-                arrivStateB &&
-                (!numberOfStopsB &&
-                !classReqB) &&
-                !airCarrierB
-                )
+            Boolean validCustomer = false;
+            if (txtID.Text.Trim() != "")
             {
-                gvFlights.DataSource = pxy.Reserve(airCarrierID, flight, customer, travelID, travelPassword); //call on web service method
+                //set customer information
+                customer.CustomerID = Convert.ToInt32(txtID.Text);
 
+                validCustomer = true;
             }
+            else if ((txtID.Text.Trim() == "")&&(txtName.Text.Trim() != "") && (txtPhone.Text.Trim() != "") && (txtEmail.Text.Trim() != ""))
+            {
+                customer.CustomerID = 0;
+                customer.CustomerName = txtName.Text;
+                customer.CustomerPhone = txtPhone.Text;
+                customer.CustomerEmail = txtEmail.Text;
+                validCustomer = true;
+            }
+            if (validCustomer == true)
+            {
+                //set flight object flight ID information
+                flight.FlightID = Convert.ToInt32(txtFlightID.Text);
+
+                //save inputed ID and password
+                travelID = txtTravelID.Text;
+                travelPassword = txtTravelPassword.Text;
+
+                AirServiceWS.AirCarrierClass reserveCarrierID = new AirServiceWS.AirCarrierClass();
+                reserveCarrierID.AirCarrierID = Convert.ToInt32(txtReserveAirCarrierID.Text);
+                pxy.Reserve(reserveCarrierID, flight, customer, travelID, travelPassword); //call on web service method
+            }
+
             //---
 
         }

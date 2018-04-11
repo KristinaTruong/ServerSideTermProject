@@ -53,12 +53,12 @@ namespace AirServiceProject
         public DataSet FindFlights(RequirementClass requirements, String DepartureCity, String DepartureState, String ArrivalCity, String ArrivalState)
         {
             //if only one requirement is specified or neither is
-            if (requirements.requirementClass == null || requirements.requirementStops == null)
+            if (requirements.requirementClass != null && requirements.requirementStops != null)
             {
                 SqlCommand objCommand = new SqlCommand();
                 objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "FindFlightsEitherReq";
-                objCommand.Parameters.AddWithValue("stops", requirements.requirementStops);
+                objCommand.CommandText = "FindFlightsBothReq";
+                objCommand.Parameters.AddWithValue("stops", Convert.ToInt32(requirements.requirementStops));
                 objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
                 objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
                 objCommand.Parameters.AddWithValue("departureState", DepartureState);
@@ -71,18 +71,36 @@ namespace AirServiceProject
             //if both requirements are specified
             else
             {
-                SqlCommand objCommand = new SqlCommand();
-                objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "FindFlightsBothReq";
-                objCommand.Parameters.AddWithValue("stops", requirements.requirementStops);
-                objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
-                objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
-                objCommand.Parameters.AddWithValue("departureState", DepartureState);
-                objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
-                objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
-                DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
-                return OpenFlights;
+                if (requirements.requirementStops != null)
+                {
+                    SqlCommand objCommand = new SqlCommand();
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FindFlightsByStops";
+                    objCommand.Parameters.AddWithValue("stops", Convert.ToInt32(requirements.requirementStops));
+                    objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("departureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
+                    DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return OpenFlights;
+                }
+
+                else
+                {
+                    SqlCommand objCommand = new SqlCommand();
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FindFlightsByClass";
+                    objCommand.Parameters.AddWithValue("class", requirements.requirementClass);
+                    objCommand.Parameters.AddWithValue("departureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("departureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("arrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("arrivalState", ArrivalState);
+                    DataSet OpenFlights = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return OpenFlights;
+                }
             }
+
+
 
         }
 
@@ -94,7 +112,7 @@ namespace AirServiceProject
             //checks to make sure the arguments are valid
             if (checkIdAndPassword(TravelSiteID, TravelSitePassword)
                 && (flight.FlightID != 0)
-                && (customer.CustomerID != 0))
+               )
             {
                 //Check that the flight still has seats left
                 Boolean hasOpenSeats = flightHasSeats(flight);
@@ -103,7 +121,7 @@ namespace AirServiceProject
                 {
                     //first, check if the customer is in the database, if not create a record for them
 
-                    checkCustomer(customer);
+                    customer.CustomerID = checkCustomer(customer);
                     //second, create a reservation
                     int reservationID = Convert.ToInt32(CreateReservation(customer).Tables[0].Rows[0][0].ToString());
 
@@ -168,11 +186,11 @@ namespace AirServiceProject
         //checks to see if a customer ID is provided in customer object or if the provided
         //customerID is in the customer database
         //if no for either, a new customer is made
-        private void checkCustomer(CustomerClass customer)
+        private int checkCustomer(CustomerClass customer)
         {
             if (customer.CustomerID == 0)
             {
-                createCustomer(customer);
+                return createCustomer(customer);
             }
             else
             {
@@ -185,7 +203,11 @@ namespace AirServiceProject
                 if (FindCustomer.Tables[0].Rows.Count == 0)
                 {
                     //create a new customer if the customer cannot be found
-                    createCustomer(customer);
+                    return createCustomer(customer);
+                }
+                else
+                {
+                    return Convert.ToInt32(FindCustomer.Tables[0].Rows[0][0].ToString());
                 }
             }
 
@@ -193,7 +215,7 @@ namespace AirServiceProject
         }
 
         //creates a new customer
-        private void createCustomer(CustomerClass customer)
+        private int createCustomer(CustomerClass customer)
         {
             SqlCommand objCommandCheckCustomer = new SqlCommand();
             objCommandCheckCustomer.CommandType = CommandType.StoredProcedure;
@@ -201,7 +223,8 @@ namespace AirServiceProject
             objCommandCheckCustomer.Parameters.AddWithValue("customerName", customer.CustomerName);
             objCommandCheckCustomer.Parameters.AddWithValue("customerPhone", customer.CustomerPhone);
             objCommandCheckCustomer.Parameters.AddWithValue("customerEmail", customer.CustomerEmail);
-            DataSet CreateCustomer = objDB.GetDataSetUsingCmdObj(objCommandCheckCustomer);
+            int custID = Convert.ToInt32(objDB.GetDataSetUsingCmdObj(objCommandCheckCustomer).Tables[0].Rows[0][0].ToString());
+            return custID;
         }
         //method to check travel site credentials
         private Boolean checkIdAndPassword(String TravelSiteID, String TravelSitePassword)
@@ -248,8 +271,8 @@ namespace AirServiceProject
             if (FlightData.Tables[0].Rows.Count != 0)
             {
                 //check if flight has open seats
-                if (Convert.ToInt32(FlightData.Tables[0].Rows[0][14].ToString()) >
-                    Convert.ToInt32(FlightData.Tables[0].Rows[0][15].ToString()))
+                if (Convert.ToInt32(FlightData.Tables[0].Rows[0][13].ToString()) >
+                    Convert.ToInt32(FlightData.Tables[0].Rows[0][14].ToString()))
                 {  //max seats > seats reserved
                     return true; //if yes, return true
                 }
@@ -263,10 +286,10 @@ namespace AirServiceProject
         {
             objCommand.CommandType = CommandType.StoredProcedure;
             objCommand.CommandText = "GetAirCarriers";
-            objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
-            objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
-            objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
-            objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+            objCommand.Parameters.AddWithValue("@DepartureCity", DepartureCity);
+            objCommand.Parameters.AddWithValue("@DepartureState", DepartureState);
+            objCommand.Parameters.AddWithValue("@ArrivalCity", ArrivalCity);
+            objCommand.Parameters.AddWithValue("@ArrivalState", ArrivalState);
 
             DataSet AirCarrier = objDB.GetDataSetUsingCmdObj(objCommand);
 
@@ -275,19 +298,66 @@ namespace AirServiceProject
         [WebMethod]
         public DataSet FilterFlightsByCarrier(AirCarrierClass AirCarrierID, RequirementClass requirements, string DepartureCity, string DepartureState, string ArrivalCity, string ArrivalState)
         {
-            objCommand.CommandType = CommandType.StoredProcedure;
-            objCommand.CommandText = "FilterFlightsByCarrier";
-            objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
-            objCommand.Parameters.AddWithValue("@theStops", requirements.requirementStops);
-            objCommand.Parameters.AddWithValue("@theClass", requirements.requirementClass);
-            objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
-            objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
-            objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
-            objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+            if (requirements.requirementClass != null && requirements.requirementStops != null)
+            {
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "FilterFlightsByCarrier";
+                objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
+                objCommand.Parameters.AddWithValue("@theStops", requirements.requirementStops);
+                objCommand.Parameters.AddWithValue("@theClass", requirements.requirementClass);
+                objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+                objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+                objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+                objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
 
-            DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
-            return FilterFlight;
+                DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+                return FilterFlight;
+            }
+            else
+            {
+                if (requirements.requirementStops != null)
+                {
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FilterFlightsByCarrierStops";
+                    objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
+                    objCommand.Parameters.AddWithValue("@theStops", requirements.requirementStops);
+                    objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
 
+                    DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return FilterFlight;
+                }
+                else if (requirements.requirementClass != null)
+                {
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FilterFlightsByCarrierClass";
+                    objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
+                    objCommand.Parameters.AddWithValue("@theClass", requirements.requirementClass);
+                    objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+
+                    DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return FilterFlight;
+                }
+
+                else
+                {
+                    objCommand.CommandType = CommandType.StoredProcedure;
+                    objCommand.CommandText = "FilterFlightsByCarrierWOReqs";
+                    objCommand.Parameters.AddWithValue("@theAirCarrierID", AirCarrierID.AirCarrierID);
+                    objCommand.Parameters.AddWithValue("@theDepartureCity", DepartureCity);
+                    objCommand.Parameters.AddWithValue("@theDepartureState", DepartureState);
+                    objCommand.Parameters.AddWithValue("@theArrivalCity", ArrivalCity);
+                    objCommand.Parameters.AddWithValue("@theArrivalState", ArrivalState);
+
+                    DataSet FilterFlight = objDB.GetDataSetUsingCmdObj(objCommand);
+                    return FilterFlight;
+                }
+            }
 
 
         }

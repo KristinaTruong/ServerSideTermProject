@@ -50,7 +50,6 @@
                         <h2>VACATION FLIGHT BOOKING</h2>
                     </th>
                 </tr>
-                <tr></tr>
                 <tr style="vertical-align: text-top;">
                     <td>
                         <div class="pad">
@@ -85,7 +84,8 @@
                             <br />
                             <asp:Label ID="Label1" runat="server" Text="Preferred Class:"></asp:Label><br />
                             <asp:DropDownList ID="ddlClass" runat="server">
-                                <asp:ListItem Selected="True">First</asp:ListItem>
+                                <asp:ListItem Selected="True" Value="All">All Classes</asp:ListItem>
+                                <asp:ListItem>First</asp:ListItem>
                                 <asp:ListItem>Economy</asp:ListItem>
                                 <asp:ListItem>Business</asp:ListItem>
                                 <asp:ListItem>Premium</asp:ListItem>
@@ -93,32 +93,22 @@
                             </asp:DropDownList>
                             <br />
                             <br />
- Preferred Number of Stops: Preferred Number of Stops:<br />
+ Preferred Number of Stops: <br />
                             <asp:TextBox ID="txtStops" runat="server"></asp:TextBox>
                             <br />
                             <br />
                             <asp:Label ID="Label2" runat="server" Text="Air Carrier"></asp:Label>
 
-                            <br />
+                            &nbsp;ID<br />
 
                             <asp:TextBox ID="txtAirCarrier" runat="server"></asp:TextBox>
 
 
                             <br />
                             <br />
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" UseSubmitBehavior="False" />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
 
-                            <asp:GridView ID="gvFlights" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
-                                <AlternatingRowStyle BackColor="#CCCCCC" />
-                                <FooterStyle BackColor="#CCCCCC" />
-                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#383838" />
-                            </asp:GridView>
+                            
                         </div>
                     </td>
                     <td>
@@ -158,9 +148,28 @@
                                 <asp:TextBox ID="txtTravelPassword" runat="server"></asp:TextBox>
                                 <br />
                                 <br />
-                                <asp:Button ID="btnReserve" runat="server" Text="Reserve" OnClick="btnReserve_Click" />
+                                Air Carrier ID<br />
+                                <asp:TextBox ID="txtReserveAirCarrierID" runat="server"></asp:TextBox>
+                                <br />
+                                <br />
+                                <asp:Button ID="btnReserve" runat="server" Text="Reserve" OnClick="btnReserve_Click" CausesValidation="False" ViewStateMode="Enabled" />
                             </div>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:GridView ID="gvFlights" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Font-Size="12pt">
+                                <AlternatingRowStyle BackColor="#CCCCCC" />
+                                <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
+                            </asp:GridView>
                     </td>
                 </tr>
 
