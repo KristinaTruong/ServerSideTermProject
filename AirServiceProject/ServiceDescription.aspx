@@ -61,14 +61,19 @@
                                         <b>Parameters (In Order)</b>
 
                                         <ol>
-                                            <li>AirCarrierClass object - AirCarrierID<
+                                            <li>AirCarrierClass - AirCarrierID</li>
+                                            <li>String - DepartureCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
                                             </li>
-                                            <li>String - DepartureCity</li>
-                                            <li>String - DepartureState (String)<ul>
+                                            <li>String - DepartureState<ul>
                                                 <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
                                             </ul>
                                             </li>
-                                            <li>String - ArrivalCity</li>
+                                            <li>String - ArrivalCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
                                             <li>String - ArrivalState<ul>
                                                 <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
                                             </ul>
@@ -85,9 +90,11 @@
                                             <li>decimal - Price</li>
                                             <li>String - DepartureCity</li>
                                             <li>String - DepartureState</li>
+                                            <li>String - DepartureDate</li>
                                             <li>String - DepartureTime</li>
                                             <li>String - ArrivalCity</li>
                                             <li>String - ArrivalState</li>
+                                            <li>String - ArrivalDate</li>
                                             <li>String - ArrivalTime</li>
                                             <li>int - Stops</li>
                                             <li>String - Class</li>
@@ -112,12 +119,7 @@
                                     <div class="col">
                                         <b>Description</b>
                                         <p>
-                                            This method accepts an object of the RequirementClass that contains information
-                        about the search requirements the user is looking for and 
-                         returns a DataSet containing records 
-                        that meet the requirements. Both class and stops may be specified for this search, but at least one of these requirements must be
-                                            specified for this method.
-                        This method returns all flights regardless of the air carrier.
+                                            Finds all flights with the specified class or stops requirement, and specified departure and arrival credentials
                                         </p>
                                     </div>
                                 </div>
@@ -126,18 +128,24 @@
                                         <b>Parameters (In Order)</b>
 
                                         <ol>
-                                            <li>RequirementClass object - requirements
+                                            <li>RequirementClass - requirements</li>
+                                            <li>String - DepartureCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
                                             </li>
-                                            <li>String - DepartureCity</li>
                                             <li>String - DepartureState<ul>
                                                 <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
                                             </ul>
                                             </li>
-                                            <li>String - ArrivalCity</li>
+                                            <li>String - ArrivalCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
                                             <li>String - ArrivalState<ul>
                                                 <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
                                             </ul>
                                             </li>
+
                                         </ol>
                                     </div>
                                     <div class="col">
@@ -150,9 +158,11 @@
                                             <li>decimal - Price</li>
                                             <li>String - DepartureCity</li>
                                             <li>String - DepartureState</li>
+                                            <li>String - DepartureDate</li>
                                             <li>String - DepartureTime</li>
                                             <li>String - ArrivalCity</li>
                                             <li>String - ArrivalState</li>
+                                            <li>String - ArrivalDate</li>
                                             <li>String - ArrivalTime</li>
                                             <li>int - Stops</li>
                                             <li>String - Class</li>
@@ -186,10 +196,18 @@
                                     <div class="col">
                                         <b>Parameters (In Order)</b>
                                         <ol>
-                                            <li>FlightClass object - flight</li>
-                                            <li>CustomerClass object - customer</li>
-                                            <li>String - TravelSiteID</li>
-                                            <li>String - TravelSitePassword</li>
+                                            <li>AirCarrierClass AirCarrierID</li>
+                                            <li>FlightClass flight</li>
+                                            <li>CustomerClass customer</li>
+                                            <li>String TravelSiteID<ul>
+                                                <li>Email tuf54356@temple.edu for site ID</li>
+                                            </ul>
+                                            </li>
+                                            <li>String TravelSitePassword<ul>
+                                                <li>Email tuf54356@temple.edu for site password</li>
+                                            </ul>
+                                            </li>
+
                                         </ol>
                                     </div>
                                     <div class="col">
@@ -206,9 +224,10 @@
                         </div>
                     </div>
                     <br />
+
                     <div class="card">
                         <div class="card-header">
-                            <h5>ReserveTwoWay</h5>
+                            <h5>FilterFlightsByCarrier</h5>
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -216,7 +235,7 @@
                                     <div class="col">
                                         <b>Description</b>
                                         <p>
-                                            Similar to the Reserve method, but this method reserves a two-way trip. Two flight objects are needed.
+                                            Get flights with the specified requirements, departure and arrival credentials, of a certain air carrier
                                         </p>
                                     </div>
                                 </div>
@@ -224,18 +243,110 @@
                                     <div class="col">
                                         <b>Parameters (In Order)</b>
                                         <ol>
-                                            <li>FlightClass object - firstFlight</li>
-                                            <li>FlightClass object - secondFlight</li>
-                                            <li>CustomerClass object - customer</li>
-                                            <li>String - TravelSiteID</li>
-                                            <li>String - TravelSitePassword</li>
+                                            <li>AirCarrierClass - AirCarrierID</li>
+                                            <li>RequirementClass - requirements</li>
+                                            <li>String - DepartureCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - DepartureState<ul>
+                                                <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - ArrivalCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - ArrivalState<ul>
+                                                <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                            </ul>
+                                            </li>
                                         </ol>
                                     </div>
                                     <div class="col">
-                                        <b>Boolean Returned</b>
+                                        <b>Dataset Returned (In Order)</b>
+
                                         <ol>
-                                            <li>True - Reservations were successfully booked</li>
-                                            <li>False - Reservations failed to be booked</li>
+                                            <li>int - FlightID</li>
+                                            <li>int - AirCarrierID</li>
+                                            <li>String - AirCarrierName</li>
+                                            <li>decimal - Price</li>
+                                            <li>String - DepartureCity</li>
+                                            <li>String - DepartureState</li>
+                                            <li>String - DepartureDate</li>
+                                            <li>String - DepartureTime</li>
+                                            <li>String - ArrivalCity</li>
+                                            <li>String - ArrivalState</li>
+                                            <li>String - ArrivalDate</li>
+                                            <li>String - ArrivalTime</li>
+                                            <li>int - Stops</li>
+                                            <li>String - Class</li>
+                                            <li>int - MaxSeats</li>
+                                            <li>int - SeatsReserved</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>GetAirCarriers</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Description</b>
+                                        <p>
+                                            Get all air carriers that have flights with the specified departure and arrival credentials.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Parameters (In Order)</b>
+                                        <ol>
+                                            <li>String - DepartureCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - DepartureState<ul>
+                                                <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - ArrivalCity<ul>
+                                                <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                            </ul>
+                                            </li>
+                                            <li>String - ArrivalState<ul>
+                                                <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                            </ul>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <div class="col">
+                                        <b>Dataset Returned (In Order)</b>
+
+                                        <ol>
+                                            <li>int - FlightID</li>
+                                            <li>int - AirCarrierID</li>
+                                            <li>String - AirCarrierName</li>
+                                            <li>decimal - Price</li>
+                                            <li>String - DepartureCity</li>
+                                            <li>String - DepartureState</li>
+                                            <li>String - DepartureDate</li>
+                                            <li>String - DepartureTime</li>
+                                            <li>String - ArrivalCity</li>
+                                            <li>String - ArrivalState</li>
+                                            <li>String - ArrivalDate</li>
+                                            <li>String - ArrivalTime</li>
+                                            <li>int - Stops</li>
+                                            <li>String - Class</li>
+                                            <li>int - MaxSeats</li>
+                                            <li>int - SeatsReserved</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -299,6 +410,8 @@
                             <h5>AirCarrierClass</h5>
                         </div>
                         <div class="card-body">
+                            <b>Notes:</b><br />
+                            For all web methods, only the AirCarrierID property is needed<br /><br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>int - AirCarrierID
@@ -314,12 +427,17 @@
                             <h5>CustomerClass</h5>
                         </div>
                         <div class="card-body">
+                            <b>Notes:</b><br />
+                            If a returning customer, only need CustomerID. If new customer, only name, phone, and email are needed. Customer ID would be
+                            auto-generated for new customers.<br /><br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>int - CustomerID
                                 </li>
                                 <li>String - CustomerName</li>
-                                <li>String - CustomerPhone</li>
+                                <li>String - CustomerPhone<ul>
+                                    <li>Must be in the format XXX-XXX-XXXX</li>
+                                                          </ul></li>
                                 <li>String - CustomerEmail</li>
                             </ul>
                         </div>
@@ -330,11 +448,21 @@
                             <h5>RequirementClass</h5>
                         </div>
                         <div class="card-body">
+                            <b>Notes:</b><br />
+                            Allowed values for class specifications must be exactly as listed below, including capitalization<br /><br />
                             <b>Properties (Get & Set)</b>
                             <ul>
-                                <li>String - requirementStops
+                                <li>String - requirementStops<ul>
+                                    <li>Can not be less than zero</li>
+                                </ul>
                                 </li>
-                                <li>String - requirementClass</li>
+                                <li>String - requirementClass<ul>
+                                    <li>Allowed values<ul>
+                                        <li>"Economy"</li>
+                                        <li>"Business"</li>
+                                        <li>"Premium"</li>
+                                        <li>"First"</li>
+                                    </ul></li></li>
                             </ul>
                         </div>
                     </div>
@@ -344,10 +472,65 @@
                             <h5>FlightClass</h5>
                         </div>
                         <div class="card-body">
+                            <b>Notes:</b><br />
+                            FlightID is not unique, and can have different air carriers, requirements, 
+                            departures, arrivals, etc. For example, there can be multiple Flight 30s for multiple air carriers.<br />
+                            For the web methods, only FlightID is needed for them to properly function.<br /><br />
                             <b>Properties (Get & Set)</b>
                             <ul>
-                                <li>DATATYPE - PROPERTY NAME (ex.int - AirCarrierID)
+                                <li>int - FlightID</li>
+                                <li>int - AirCarrierID</li>
+                                <li>decimal - Price</li>
+                                <li>string - DepartureCity<ul>
+                                    <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                </ul>
                                 </li>
+                                <li>string - DepartureState<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                                <li>string - DepartureDate<ul>
+                                    <li>Must be in the format dd/mm/yyyy</li>
+                                </ul>
+                                </li>
+                                <li>string - DepartureTime<ul>
+                                    <li>Must be in the format h:mm (ex. 3:00pm)</li>
+                                </ul>
+                                </li>
+                                <li>string - ArrivalCity<ul>
+                                    <li>Must have proper capitalization and spacing (ex. "Las Vegas")</li>
+                                </ul>
+                                </li>
+                                <li>string - ArrivalState<ul>
+                                    <li>Must be acronym of state (ex. PA for Pennsylvania)</li>
+                                </ul>
+                                </li>
+                                <li>string - ArrivalDate<ul>
+                                    <li>Must be in the format dd/mm/yyyy</li>
+                                </ul>
+                                </li>
+                                <li>string - ArrivalTime<ul>
+                                    <li>Must be in the format h:mm (ex. 3:00pm)</li>
+                                </ul>
+                                </li>
+                                <li>int - Stops<ul>
+                                    <li>Can not be less than zero</li>
+                                </ul>
+                                </li>
+                                <li>string - Class<ul>
+                                    <li>Allowed values<ul>
+                                        <li>"Economy"</li>
+                                        <li>"Business"</li>
+                                        <li>"Premium"</li>
+                                        <li>"First"</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                                <li>int - MaxSeats<ul>
+                                    <li>Can not be less than zero</li>
+                                </ul></li>
+                                <li>int - SeatsReserved</li>
                             </ul>
                         </div>
                     </div>
