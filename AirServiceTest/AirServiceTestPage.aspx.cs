@@ -10,10 +10,10 @@ namespace AirServiceProject
 {
     public partial class Test : System.Web.UI.Page
     {
-        /*
+        
 
         //global pxy object for methods to call web methods with
-        public AirServiceProject.AirService pxy = new AirServiceProject.AirService();
+        public AirServiceTest.AirServiceWS.AirService pxy = new AirServiceTest.AirServiceWS.AirService();
 
         //variables to hold argument values
         //associated booleans for if-else statement purposes
@@ -43,11 +43,14 @@ namespace AirServiceProject
         String travelID;
         String travelPassword;
 
+
         //objects to be used in booking and searching flights
-        AirServiceProject.CustomerClass customer = new AirServiceProject.CustomerClass();
-        AirServiceProject.FlightClass flight = new AirServiceProject.FlightClass();
-        AirServiceProject.RequirementClass requirements = new AirServiceProject.RequirementClass();
-        AirServiceProject.AirCarrierClass airCarrierID = new AirServiceProject.AirCarrierClass();   */
+
+
+        AirServiceTest.AirServiceWS.CustomerClass customer = new AirServiceTest.AirServiceWS.CustomerClass();
+        AirServiceTest.AirServiceWS.FlightClass flight = new AirServiceTest.AirServiceWS.FlightClass();
+        AirServiceTest.AirServiceWS.RequirementClass requirements = new AirServiceTest.AirServiceWS.RequirementClass();
+         AirServiceTest.AirServiceWS.AirCarrierClass airCarrierID = new AirServiceTest.AirServiceWS.AirCarrierClass();   
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,7 +63,7 @@ namespace AirServiceProject
         protected void btnSearch_Click(object sender, EventArgs e)
         {
 
-            /*
+            
             //assignment variables their appropriate values from the form text boxes
             //if value received, set associated boolean to true
             depCity = (txtDepCity.Text.Trim() != null) ? txtDepCity.Text.Trim() : null;
@@ -99,10 +102,10 @@ namespace AirServiceProject
             airCarrierB = (airCarrier != null) ? true : false;
 
 
-            airCarrierID.AirCarrierID = airCarrier;
+            airCarrierID.AirCarrierID = Convert.ToInt32(airCarrier);
 
 
-            requirements.requirementStops = numberOfStops;
+            requirements.requirementStops = numberOfStops.ToString();
             requirements.requirementClass = classReq;
 
             //--------------------------------------------------------------------
@@ -167,23 +170,21 @@ namespace AirServiceProject
             }
             reserveSection.Style["display"] = "block";
 
-    */
+    
 
         }
 
         protected void btnReserve_Click(object sender, EventArgs e)
         {
-            /*
-             * 
-             * 
+
             //set customer information
-            customer.CustomerID = txtID.Text;
+            customer.CustomerID = Convert.ToInt32(txtID.Text);
             customer.CustomerName = txtName.Text;
             customer.CustomerPhone = txtPhone.Text;
             customer.CustomerEmail = txtEmail.Text;
 
             //set flight object flight ID information
-            flight.FlightID = txtFlightID.Text;
+            flight.FlightID = Convert.ToInt32(txtFlightID.Text);
 
             //save inputed ID and password
             travelID = txtTravelID.Text;
@@ -203,7 +204,7 @@ namespace AirServiceProject
 
             }
 
-    */
+    
         }
 
 

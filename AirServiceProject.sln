@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirServiceLibrary", "AirSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{281B06A9-4076-4D1D-86E5-DA240F7F154F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirServiceTest", "AirServiceTest\AirServiceTest.csproj", "{6F76CA68-F063-4DCE-A6D5-346F68961C3D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{281B06A9-4076-4D1D-86E5-DA240F7F154F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{281B06A9-4076-4D1D-86E5-DA240F7F154F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{281B06A9-4076-4D1D-86E5-DA240F7F154F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F76CA68-F063-4DCE-A6D5-346F68961C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F76CA68-F063-4DCE-A6D5-346F68961C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F76CA68-F063-4DCE-A6D5-346F68961C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F76CA68-F063-4DCE-A6D5-346F68961C3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

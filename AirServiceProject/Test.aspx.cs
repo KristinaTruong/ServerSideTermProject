@@ -10,34 +10,78 @@ namespace AirServiceProject
 {
 	public partial class Test : System.Web.UI.Page
 	{
-        public AirServiceProject.AirService pxy = new AirServiceProject.AirService();
+        //global pxy object for methods to call web methods with
+        public AirServiceWS.AirService pxy = new AirServiceWS.AirService();
+
+        //variables to hold argument values
+        //associated booleans for if-else statement purposes
+        String depCity;
+        Boolean depCityB;
+
+        String depState;
+        Boolean depStateB;
+
+        String arrivCity;
+        Boolean arrivCityB;
+
+        String arrivState;
+        Boolean arrivStateB;
+
+        int numberOfTrips; //default is one way trip
+
+        int numberOfStops;
+        Boolean numberOfStopsB;
+
+        String classReq = null;
+        Boolean classReqB;
+
+        String airCarrier;
+        Boolean airCarrierB;
+
+        String travelID;
+        String travelPassword;
+
+
+        //objects to be used in booking and searching flights
+
+
+        AirServiceWS.CustomerClass customer = new AirServiceWS.CustomerClass();
+        AirServiceWS.FlightClass flight = new AirServiceWS.FlightClass();
+        AirServiceWS.RequirementClass requirements = new AirServiceWS.RequirementClass();
+        AirServiceWS.AirCarrierClass airCarrierID = new AirServiceWS.AirCarrierClass();
+
         protected void Page_Load(object sender, EventArgs e)
-		{
+        {
             DataSet startDS = null;
             gvFlights.DataSource = startDS;
             gvFlights.DataBind();
-		}
-        /*
+        }
+
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            String depCity = (txtDepCity.Text.Trim() != null) ? txtDepCity.Text.Trim() : null;
-            Boolean depCityB = (txtDepCity.Text.Trim() != null) ? true : false;
 
-            String depState = (txtDepState.Text.Trim() != null) ? txtDepState.Text.Trim() : null;
-            Boolean depStateB = (txtDepState.Text.Trim() != null) ? true : false;
 
-            String arrivCity = (txtArrCity.Text.Trim() != null) ? txtArrCity.Text.Trim() : null;
-            Boolean arrivCityB = (txtArrCity.Text.Trim() != null) ? true : false;
+            //assignment variables their appropriate values from the form text boxes
+            //if value received, set associated boolean to true
+            depCity = (txtDepCity.Text.Trim() != "") ? txtDepCity.Text.Trim() : "";
+            depCityB = (txtDepCity.Text.Trim() != "") ? true : false;
 
-            String arrivState = (txtArrState.Text.Trim() != null) ? txtArrState.Text.Trim() : null;
-            Boolean arrivStateB = (txtArrState.Text.Trim() != null) ? true : false;
+            depState = (txtDepState.Text.Trim() != "") ? txtDepState.Text.Trim() : "";
+            depStateB = (txtDepState.Text.Trim() != "") ? true : false;
 
-            int numberOfTrips = (RbTwo.Checked) ? 2 : 1;
+            arrivCity = (txtArrCity.Text.Trim() != "") ? txtArrCity.Text.Trim() : "";
+            arrivCityB = (txtArrCity.Text.Trim() != "") ? true : false;
 
-            int numberOfStops = (txtStops.Text.Trim() != null) ? (Convert.ToInt32(txtStops.Text.Trim())) : -1;
-            Boolean numberOfStopsB = (numberOfStops != -1) ? true : false;
+            arrivState = (txtArrState.Text.Trim() != "") ? txtArrState.Text.Trim() : "";
+            arrivStateB = (txtArrState.Text.Trim() != "") ? true : false;
 
-            String classReq = null;
+            numberOfTrips = (RbTwo.Checked) ? 2 : 1;
+
+            numberOfStops = (txtStops.Text.Trim() != "") ? (Convert.ToInt32(txtStops.Text.Trim())) : -1;
+            numberOfStopsB = (numberOfStops != -1) ? true : false;
+
+            //for one or two way radio buttons
             if (ddlClass.SelectedIndex != 0)
             {
                 switch (ddlClass.SelectedIndex)
@@ -46,27 +90,31 @@ namespace AirServiceProject
                     case 2: classReq = "Economy"; break;
                     case 3: classReq = "Business"; break;
                     case 4: classReq = "Premium"; break;
-                    default: classReq = null; break;
+                    default: classReq = ""; break;
                 }
             }
-            Boolean classReqB = (classReq != null) ? true : false; 
 
-            String airCarrier = (txtAirCarrier.Text.Trim() != null) ? txtAirCarrier.Text.Trim() : null;
-            Boolean airCarrierB = (airCarrier != null) ? true : false;
+            classReqB = (classReq != "") ? true : false;
 
-            AirServiceProject.AirCarrierClass airCarrierID = new AirServiceProject.AirCarrierClass();
-            airCarrierID.AirCarrierID = airCarrier;
+            airCarrier = (txtAirCarrier.Text.Trim() != "") ? txtAirCarrier.Text.Trim() : "";
+            airCarrierB = (airCarrier != "") ? true : false;
 
-            AirServiceProject.RequirementClass requirements = new AirServiceProject.RequirementClass();
-            requirements.requirementStops = numberOfStops;
-            requirements.requirementClass = classReq;
+            if (airCarrierB == true)
+            {
+                airCarrierID.AirCarrierID = Convert.ToInt32(airCarrier);
+            }
 
-            AirServiceProject.CustomerClass customer = new AirServiceProject.CustomerClass();
-            customer.CustomerID = txtID.Text;
-            customer.CustomerName = txtName.Text;
-            customer.CustomerPhone = txtPhone.Text;
-            customer.CustomerEmail = txtEmail.Text;
+            if (numberOfStopsB == true)
+            {
+                requirements.requirementStops = numberOfStops.ToString();
+            }
+            if (classReqB == true)
+            {
+                requirements.requirementClass = classReq;
+            }
 
+            //--------------------------------------------------------------------
+            //Execute method depending on what values were inputted
 
             if //getAirCarriers
                 (depCityB &&
@@ -78,20 +126,20 @@ namespace AirServiceProject
                 !airCarrierB
                 )
             {
-                gvFlights.DataSource = pxy.GetAirCarriers()
+                gvFlights.DataSource = pxy.GetAirCarriers(depCity, depState, arrivCity, arrivState); //call on web service method
             }
 
-            else if
+            else if //get flights
                 (depCityB &&
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
                 (!numberOfStopsB &&
                 !classReqB) &&
-                !airCarrierB
+                airCarrierB
                 )
             {
-
+                gvFlights.DataSource = pxy.GetFlights(airCarrierID, depCity, depState, arrivCity, arrivState); //call on web service method
             }
 
             else if //find flights
@@ -99,12 +147,12 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (!numberOfStopsB &&
-                !classReqB) &&
+                (numberOfStopsB &&
+                classReqB) &&
                 !airCarrierB
                 )
             {
-
+                gvFlights.DataSource = pxy.FindFlights(requirements, depCity, depState, arrivCity, arrivState); //call on web service method
             }
 
             else if //filter flights by carrier
@@ -112,15 +160,42 @@ namespace AirServiceProject
                 depStateB &&
                 arrivCityB &&
                 arrivStateB &&
-                (!numberOfStopsB &&
-                !classReqB) &&
-                !airCarrierB
+                (numberOfStopsB &&
+                classReqB) &&
+                airCarrierB
                 )
+            {
+                gvFlights.DataSource = pxy.FilterFlightsByCarrier(airCarrierID, requirements, depCity, depState, arrivCity, arrivState); //call on web service method
+            }
+
+
+            else
             {
 
             }
+            reserveSection.Style["display"] = "block";
 
-            else if //reserve
+
+
+        }
+
+        protected void btnReserve_Click(object sender, EventArgs e)
+        {
+
+            //set customer information
+            customer.CustomerID = Convert.ToInt32(txtID.Text);
+            customer.CustomerName = txtName.Text;
+            customer.CustomerPhone = txtPhone.Text;
+            customer.CustomerEmail = txtEmail.Text;
+
+            //set flight object flight ID information
+            flight.FlightID = Convert.ToInt32(txtFlightID.Text);
+
+            //save inputed ID and password
+            travelID = txtTravelID.Text;
+            travelPassword = txtTravelPassword.Text;
+
+            if //reserve flight
                 (depCityB &&
                 depStateB &&
                 arrivCityB &&
@@ -130,13 +205,11 @@ namespace AirServiceProject
                 !airCarrierB
                 )
             {
+                gvFlights.DataSource = pxy.Reserve(airCarrierID, flight, customer, travelID, travelPassword); //call on web service method
 
             }
 
-            else
-            {
 
-            }
-        }*/
+        }
     }
 }
