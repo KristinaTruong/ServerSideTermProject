@@ -14,9 +14,11 @@ namespace AirServiceLibrary
         public decimal Price { get; set; }
         public string DepartureCity { get; set; }
         public string DepartureState { get; set; }
+        public string DepartureDate { get; set; }
         public string DepartureTime { get; set; }
         public string ArrivalCity { get; set; }
         public string ArrivalState { get; set; }
+        public string ArrivalDate { get; set; }
         public string ArrivalTime { get; set; }
         public int Stops { get; set; }
         public string Class { get; set; }
