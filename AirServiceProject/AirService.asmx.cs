@@ -50,7 +50,7 @@ namespace AirServiceProject
 
         //get flights with the specificed requirements, departure reqs and arrival reqs
         [WebMethod]
-        public DataSet FindFlights(RequirementClass requirements,String DepartureCity, String DepartureState,String ArrivalCity, String ArrivalState)
+        public DataSet FindFlights(RequirementClass requirements, String DepartureCity, String DepartureState, String ArrivalCity, String ArrivalState)
         {
             //if only one requirement is specified or neither is
             if (requirements.requirementClass == null || requirements.requirementStops == null)
@@ -89,7 +89,7 @@ namespace AirServiceProject
 
         //Reserve one flight
         [WebMethod]
-        public Boolean Reserve(AirCarrierClass AirCarrierID, FlightClass flight, CustomerClass customer,String TravelSiteID, String TravelSitePassword)
+        public Boolean Reserve(AirCarrierClass AirCarrierID, FlightClass flight, CustomerClass customer, String TravelSiteID, String TravelSitePassword)
         {
             //checks to make sure the arguments are valid
             if (checkIdAndPassword(TravelSiteID, TravelSitePassword)

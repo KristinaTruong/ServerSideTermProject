@@ -411,7 +411,8 @@
                         </div>
                         <div class="card-body">
                             <b>Notes:</b><br />
-                            For all web methods, only the AirCarrierID property is needed<br /><br />
+                            For all web methods, only the AirCarrierID property is needed<br />
+                            <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>int - AirCarrierID
@@ -429,7 +430,8 @@
                         <div class="card-body">
                             <b>Notes:</b><br />
                             If a returning customer, only need CustomerID. If new customer, only name, phone, and email are needed. Customer ID would be
-                            auto-generated for new customers.<br /><br />
+                            auto-generated for new customers.<br />
+                            <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>int - CustomerID
@@ -437,7 +439,8 @@
                                 <li>String - CustomerName</li>
                                 <li>String - CustomerPhone<ul>
                                     <li>Must be in the format XXX-XXX-XXXX</li>
-                                                          </ul></li>
+                                </ul>
+                                </li>
                                 <li>String - CustomerEmail</li>
                             </ul>
                         </div>
@@ -449,7 +452,8 @@
                         </div>
                         <div class="card-body">
                             <b>Notes:</b><br />
-                            Allowed values for class specifications must be exactly as listed below, including capitalization<br /><br />
+                            Allowed values for class specifications must be exactly as listed below, including capitalization<br />
+                            <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>String - requirementStops<ul>
@@ -462,7 +466,9 @@
                                         <li>"Business"</li>
                                         <li>"Premium"</li>
                                         <li>"First"</li>
-                                    </ul></li></li>
+                                    </ul>
+                                    </li>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -475,7 +481,8 @@
                             <b>Notes:</b><br />
                             FlightID is not unique, and can have different air carriers, requirements, 
                             departures, arrivals, etc. For example, there can be multiple Flight 30s for multiple air carriers.<br />
-                            For the web methods, only FlightID is needed for them to properly function.<br /><br />
+                            For the web methods, only FlightID is needed for them to properly function.<br />
+                            <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
                                 <li>int - FlightID</li>
@@ -529,7 +536,8 @@
                                 </li>
                                 <li>int - MaxSeats<ul>
                                     <li>Can not be less than zero</li>
-                                </ul></li>
+                                </ul>
+                                </li>
                                 <li>int - SeatsReserved</li>
                             </ul>
                         </div>

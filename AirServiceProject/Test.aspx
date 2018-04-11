@@ -6,24 +6,24 @@
 <head runat="server">
     <title></title>
     <style>
-        body{
-            background-image: url(image/maxresdefault.jpg);
-            background-size:cover;
-            background-attachment:fixed;
+        body {
+            background-image: url(image/550640-airlines-hd.jpg);
+            background-size: cover;
+            background-attachment: fixed;
         }
         form{
             background-color:white;
             padding:50px;
-            margin:auto;
+            margin:50px;
             opacity:0.95;
             width:500px;
-            max-width:500px;
+            max-width:100%;
         }
         h2{
             text-align:center;
         }
         .center{
-            text-align:center;
+            text-align:left;
             opacity:0.95;
             width:100%;
         }
@@ -54,23 +54,16 @@
         <asp:TextBox ID="txtArrCity" runat="server" ></asp:TextBox>
         <br />
         <asp:Label ID="lblArrState" runat="server" Text="Arrival State:"></asp:Label><br />
-        <asp:TextBox ID="txtArrState" runat="server" ></asp:TextBox><br />
+        <asp:TextBox ID="txtArrState" runat="server" ></asp:TextBox>&nbsp;<br />
         <br />
-        
-        <input type="date" />
-        
-        <br />
-        <br />
-        <asp:Calendar ID="gvCalender" runat="server" BackColor="#FFFFCC" BorderColor="#FFCC66" BorderWidth="1px" 
-            DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#663399"
-             Height="200px" ShowGridLines="True" style="width:100%;">
-            <DayHeaderStyle BackColor="#FFCC66" Font-Bold="True" Height="1px" />
-            <NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC" />
-            <OtherMonthDayStyle ForeColor="#CC9966" />
-            <SelectedDayStyle BackColor="#CCCCFF" Font-Bold="True" />
-            <SelectorStyle BackColor="#FFCC66" />
-            <TitleStyle BackColor="#990000" Font-Bold="True" Font-Size="9pt" ForeColor="#FFFFCC" />
-            <TodayDayStyle BackColor="#FFCC66" ForeColor="White"/>
+        <asp:Calendar ID="gvCalender" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black"
+             Height="190px" style="width:100%;" NextPrevFormat="FullMonth" Width="350px">
+            <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+            <NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
+            <OtherMonthDayStyle ForeColor="#999999" />
+            <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+            <TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
+            <TodayDayStyle BackColor="#CCCCCC"/>
         </asp:Calendar>
         <br />
         <asp:RadioButton ID="RbTwo" runat="server" Text="Round Trip" /><br />
