@@ -215,7 +215,10 @@ namespace AirServiceProject
 
                 validCustomer = true;
             }
-            else if ((txtID.Text.Trim() == "")&&(txtName.Text.Trim() != "") && (txtPhone.Text.Trim() != "") && (txtEmail.Text.Trim() != ""))
+            else if ((txtID.Text.Trim() == "")
+                &&(txtName.Text.Trim() != "") 
+                && (txtPhone.Text.Trim() != "") 
+                && (txtEmail.Text.Trim() != ""))
             {
                 customer.CustomerID = 0;
                 customer.CustomerName = txtName.Text;

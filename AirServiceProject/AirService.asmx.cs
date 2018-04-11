@@ -271,8 +271,8 @@ namespace AirServiceProject
             if (FlightData.Tables[0].Rows.Count != 0)
             {
                 //check if flight has open seats
-                if (Convert.ToInt32(FlightData.Tables[0].Rows[0][13].ToString()) >
-                    Convert.ToInt32(FlightData.Tables[0].Rows[0][14].ToString()))
+                if (Convert.ToInt32(FlightData.Tables[0].Rows[0][14].ToString()) >
+                    Convert.ToInt32(FlightData.Tables[0].Rows[0][15].ToString()))
                 {  //max seats > seats reserved
                     return true; //if yes, return true
                 }
