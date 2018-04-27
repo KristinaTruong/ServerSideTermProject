@@ -26,12 +26,21 @@
         td {
             vertical-align: top;
         }
+
+        #info, #updates {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            opacity: 0.90;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
 
         <h1 style="color: white;">AirService.asmx</h1>
+
         <div class="row">
             <div class="col-3">
                 <button class="btn btn-light btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -485,7 +494,6 @@
                             <br />
                             <b>Properties (Get & Set)</b>
                             <ul>
-                                <li>int - FlightUniqueID</li>
                                 <li>int - FlightID</li>
                                 <li>int - AirCarrierID</li>
                                 <li>decimal - Price</li>
@@ -561,6 +569,44 @@
 
 
                 </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h5>UPDATES</h5>
+            </div>
+            <div class="card-body">
+                [UPDATED 4/27/18] - screenshots and additional information added (see below)<br />
+                [UPDATED 4/24/18] - added images to the database and datasets<br />
+                NOTE: For required properties of a class object, see class tab. (ex. only AirCarrierID is needed for methods to work)
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>HELPFUL INFO</h5>
+            </div>
+            <div class="card-body">
+
+                <a href="Test.aspx">TEST PAGE</a><br />
+                --------------<br />
+                USERNAME: KJ<br />
+                PASSWORD: KJ<br />
+                --------------<br />
+                AIRCARRIER DATABASE<br />
+                <img src="Images/AC.PNG" /><br />
+                <br />
+                RESERVATION DATABASE<br />
+                <img src="Images/Reservation.PNG" /><br />
+                <br />
+                FLIGHTRESERVATION DATABASE<br />
+                <img src="Images/ReservationFlight.PNG" /><br />
+                <br />
+                FLIGHT DATABASE (table that is the main dataset return)<br />
+                <img src="Images/Flight.PNG" /><br />
+                <br />
             </div>
         </div>
     </form>
