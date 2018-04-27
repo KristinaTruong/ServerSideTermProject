@@ -96,7 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="image\550640-airlines-hd.jpg" />
+    <Content Include="image\AC.PNG" />
+    <Content Include="image\Flight.PNG" />
     <Content Include="image\maxresdefault.jpg" />
+    <Content Include="image\Reservation.PNG" />
+    <Content Include="image\ReservationFlight.PNG" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
